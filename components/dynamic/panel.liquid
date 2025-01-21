@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body text-white">
+    {% render 'partials/navbar.liquid', client: client, user: user, icon: icon %}
+    <div class="mt-20 w-9/12 mx-auto justify-center">
+        {% if access %}
+        <div class="md:flex mx-auto my-12">
+            <div
+                class="rounded-lg md:mr-12 md:w-8/12 content-center flex items-center shadow-lg bg-primary-200 py-4 px-6">
+                <a href="/refuerzo/panel/products"
+                    class="text-center mx-auto text-gray-400 bg-black bg-opacity-30 rounded-xl py-1 px-5 hover:text-gray-600 mx-auto duration-300 cursor-pointer font-semibold text-lg">Go
+                    to products setting page</a>
+                    <a href="/refuerzo/panel/promos/add"
+                    class="text-center mx-auto text-gray-400 bg-black bg-opacity-30 rounded-xl py-1 px-5 hover:text-gray-600 mx-auto duration-300 cursor-pointer font-semibold text-lg">Go to add Promo code page</a>
+            </div>
+            <div class="md:ml-auto my-3 md:my-auto md:w-8/12 rounded-lg shadow-lg bg-primary-200 py-4 px-6">
+                <p class="text-center font-semibold text-lg">Send email to current subscribers</p>
+                <p id="emailAlert" class="hidden text-center text-medium pt-2">Content</p>
+                <hr class="w-full border-opacity-30 border border-gray-600 my-3" />
+                <textarea
+                    class="rounded-lg h-44 shadow-lg text-lg w-full bg-transparent outline-none py-3 px-4 border border-gray-400 border-opacity-60"
+                    placeholder="We've made offers on all of ours products %50 sale!"></textarea>
+                <div class="flex">
+                    <a
+                        class="text-center mx-auto text-gray-400 hover:text-gray-600 duration-300 cursor-pointer font-semibold text-lg">Send
+                        Email&nbsp;<i class="fa-solid fa-paper-plane"></i></a>
+                </div>
+            </div>
+        </div>
+        <p id='alert' class='text-center text-red-600'></p>
+        <div class="md:flex">
+            <div class="md:my-auto mx-auto md:w-8/12 rounded-lg shadow-lg bg-primary-200 py-4 px-6">
+            <p class="text-center font-semibold text-lg">After purchase success message</p>
+            <hr class="w-full border-opacity-30 border border-gray-600 my-3" />
+            <textarea
+            id="successMsg"
+                class="rounded-lg h-44 shadow-lg text-lg w-full bg-transparent outline-none py-3 px-4 border border-gray-400 border-opacity-60">{{ successMsg }}</textarea>
+            <div class="flex">
+                <a onclick="modifySettings()"
+                    class="text-center mx-auto text-gray-400 mt-2 hover:text-gray-600 duration-300 cursor-pointer font-semibold text-lg">Edit</a>
+            </div>
+        </div>
+        <div class="md:my-5 md:w-8/12 ml-12 h-40 rounded-lg shadow-lg bg-primary-200 py-4 px-6">
+            <p class="text-center font-semibold text-lg">Modify shipping cost</p>
+            <hr class="w-full border-opacity-30 border border-gray-600 my-3" />
+            <input type="number"
+            id="shipping"
+                class="rounded-lg shadow-lg text-lg w-full bg-transparent outline-none py-2 px-4 border border-gray-400 border-opacity-60"
+                value="{{ shipping }}">
+            <div class="flex">
+                <a onclick="modifySettings()"
+                    class="text-center mx-auto text-gray-400 mt-2 hover:text-gray-600 duration-300 cursor-pointer font-semibold text-lg">Edit</a>
+            </div>
+        </div>
+        </div>
+        <hr class="w-full border border-opacity-20 border-gray-400 mt-12" />
+        <p class="text-center font-semibold text-3xl my-4">Current orders</p>
+        {% for order in orders %}
+        <div class="md:flex rounded-lg py-3 px-5 bg-primary-200 shadow-md items-center my-4">
+            <div class="flex items-center">
+                <p class="rounded-lg mr-2 bg-primary-100 py-1 px-2">{{ order.num }}</p>
+                <p><b class="text-gray-600">From:&nbsp;</b>{{ order.email }}</p>
+            </div>
+            <div class="mx-28 md:mx-0 md:ml-auto">
+                <a href="/refuerzo/panel/orders/{{ order.id }}"
+                    class="cursor-pointer text-light text-lg border-b border-gray-400 pb-1 duration-300 hover:text-gray-400">More
+                    details&nbsp;<i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center py-3">There're no orders at the moment</p>
+        {% endfor %}
+        <hr class="w-full border border-opacity-20 border-gray-400 mt-6" />
+        <p class="text-center font-semibold text-3xl my-4">Promo Codes</p>
+        {% for promo in promoCodes %}
+        <div class="md:flex rounded-lg py-3 px-5 bg-primary-200 shadow-md items-center my-4">
+            <div class="flex items-center">
+                <p class="rounded-lg mr-2 bg-primary-100 py-1 px-2">Promo: {{ promo.code }}</p>
+                <p><b class="text-gray-600">Limit:&nbsp;</b>{{ promo.limit }}&nbsp;<b class="text-gray-600">Unlimited:&nbsp;</b>{{ promo.unlimited }}&nbsp;<b class="text-gray-600">Ends in:&nbsp;</b>{{ promo.endDate }}&nbsp;<b class="text-gray-600">Discount:&nbsp;</b>{{ promo.discount }} EGP</p>
+            </div>
+            <div class="mx-28 md:mx-0 md:ml-auto">
+                <a href="/refuerzo/panel/promos/delete/{{ promo.code }}"
+                    class="cursor-pointer text-light text-lg border-b border-gray-400 pb-1 duration-300 hover:text-gray-400">Delete Promo</a>
+            </div>
+        </div>
+        {% else %}
+        <p class="text-center py-3">There're no promos at the moment</p>
+        {% endfor %}
+        {% else %}
+        <div class="mx-auto w-8/12 lg:w-5/12">
+            <div
+                class="shadow-lg border-dashed border border-gray-300 justify-center py-7 px-8 mt-20 lg:mt-32 mb-44 lg:mb-72 rounded-xl bg-primary-200">
+                <p class="text-center">Welcome to <b>Refuerzo Sports Wear</b> Panel</p>
+                <p class="hidden text-center text-red-700 pt-3" id="alert">Wrong password/Username</p>
+                <hr class="border border-gray-500 border-opacity-20 w-full my-5" />
+                <input id="username"
+                    class="border py-2 bg-transparent px-6 w-10/12 flex mx-auto outline-none text-gray-300 my-4"
+                    placeholder="Username" />
+                <input type="password" id="password"
+                    class="border py-2 bg-transparent px-6 w-10/12 flex mx-auto outline-none text-gray-300 my-4"
+                    placeholder="Password" />
+                <div class="flex">
+                    <a onclick="login()"
+                        class="cursor-pointer text-gray-300 duration-200 font-bold hover:text-gray-400 mx-auto py-3 px-2 text-lg">Login</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        {% render 'partials/footer.liquid' %}
+        <script src="/public/scripts/panel.js"></script>
+        <script src="/public/scripts/actions.js"></script>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body text-white">
+    {% render 'partials/navbar.liquid', client: client, user: user, icon: icon %}
+    <div class="my-12 w-9/12 mx-auto justify-center">
+        <div class="bg-primary-300 rounded-lg shadow-md py-10 px-10">
+            <p class="text-center font-light text-3xl">ID: <b>{{ orderDetails.id }}</b></p>
+            <p>Email: <b>{{ orderDetails.email }}</b></p>
+            <p>First name: <b>{{ orderDetails.firstname }}</b></p>
+            <p>Last name: <b>{{ orderDetails.lastname }}</b></p>
+            <p>Address: <b>{{ orderDetails.address }}</b></p>
+            <p>City: <b>{{ orderDetails.city }}</b></p>
+            <p>Governorate: <b>{{ orderDetails.governorate }}</b></p>
+            <p>Postal: <b>{{ orderDetails.postal }}</b></p>
+            <p>Phone: <b>+20 {{ orderDetails.phone }}</b></p>
+            {% if orderDetails.promoCode %}<p>Applied Promo: <b>{{ orderDetails.promoCode }}</b></p>{% endif %}
+            <div class="md:flex flex-grow">
+                {% for product in orderDetails.products %}
+                    <div class="flex flex-col md:flex-row justify-start items-start md:items-center">
+                        <div class="flex-shrink-0 mx-auto md:mx-0">
+                            <img src="/public/productImages/{{ product.image }}" class="w-32 rounded-lg mx-1">
+                        </div>
+                        <div class="ml-2 mt-2 md:mt-0">
+                            <p class="text-lg font-semibold">{{ product.name }}</p>
+                            <p class="font-light text-sm">Quantity: {{ product.quantity }}</p>
+                            <p class="font-light text-sm">Size: {{ product.size }}</p>
+                            <p class="font-light text-sm">
+                                {% if product.isSale %}After Sale Price{% else %}Price{% endif%}: LE {{ product.price }} EGP
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="bg-primary-100 w-full md:w-3/12 rounded-lg shadow-md py-2 px-3 flex">
+                <p>Total</p>
+                <p class="ml-auto">LE <b>{{ orderDetails.total }}</b> EGP With Shipping</p>
+            </div>
+            <button onclick="deleteOrder('{{ orderDetails.id }}')"
+                class="py-3 px-6 bg-transparent hover:bg-red-700 hover:border-red-700 hover:text-white duration-300 border border-white rounded-xl mt-6 w-full">Delete
+                Order</button>
+        </div>
+    </div>
+
+    <footer>
+        {% render 'partials/footer.liquid' %}
+        <script src="/public/scripts/actions.js"></script>
+    </footer>
+</body>
+
+</html>

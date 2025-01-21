@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body text-white">
+    {% render 'partials/navbar.liquid', client: client, user: user, icon: icon %}
+    <div class="my-12 md:w-6/12 mx-auto justify-center">
+        <div class="bg-primary-300 rounded-lg shadow-md py-10 px-10">
+            <p class="text-3xl font-semibold text-center">Refund & Exchange Policy</p>
+            <hr class="w-8/12 mx-auto border border-opacity-60 border-gray-300 my-5">
+            <p>
+                We have a 7-day return policy, which means you have 7 days after receiving your item to request a
+                return.<br /><br />
+                To be eligible for a return, your item must be in the same condition that you received it,
+                unworn or unused, with tags, and in its
+                original packaging.<br /><br />You'll also need the receipt or proof of purchase.
+                To start a return, you can contact us at Refuerzosportswear@gmail.com.
+                If your return is accepted, we'll send you a return shipping label, as well as instructions on how and
+                where to send your package. Items sent back to us without first requesting a return will not be
+                accepted.<br /><br />
+                You can always contact us for any return question at Refuerzosportswear@gmail.com.<br /><br />
+                Damages and issues<br /><br />
+                Please inspect your order upon reception and contact us immediately if the item is defective, damaged or
+                if you receive the wrong item, so that we can evaluate the issue and make it
+                right
+            </p>
+
+        </div>
+    </div>
+
+    <footer>
+        {% render 'partials/footer.liquid' %}
+    </footer>
+</body>
+
+</html>

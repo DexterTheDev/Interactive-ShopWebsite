@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% render 'partials/header.liquid', client: client, user: user %}
+</head>
+
+<body class="bg-primary-100 font-body text-white">
+    {% render 'partials/navbar.liquid', client: client, user: user, icon: icon %}
+    <div class="my-12 md:w-6/12 mx-auto justify-center">
+        <div class="bg-primary-300 rounded-lg shadow-md py-10 px-10">
+            <p class="text-6xl text-center"><i class="fas fa-check text-green-600 "></i></p>
+           <p class="text-center text-2xl font-semibold ">Your order has been successfully placed!</p>
+           <p class="text-center text-xl">{{ successMsg }}</p>
+           <p class="text-gray-300 text-center font-bold mt-5">ORDER ID: {{ productID }}</p>
+        </div>
+    </div>
+
+    <footer>
+        {% render 'partials/footer.liquid' %}
+    </footer>
+</body>
+
+</html>

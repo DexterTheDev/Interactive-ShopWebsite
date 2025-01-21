@@ -1,0 +1,39 @@
+<nav class="bg-primary-100 border-b border-primary-200">
+    <div class="md:w-9/12 mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <img src="/public/imgs/logo.jpg" class="w-28" alt="Logo" />
+                <div class="hidden md:flex ml-10 space-x-4">
+                    <a class="text-gray-200 hover:text-gray-400 transition duration-300" href="/">Home</a>
+                    <a class="text-gray-200 hover:text-gray-400 transition duration-300" href="/products">Products</a>
+                    <a class="text-gray-200 hover:text-gray-400 transition duration-300" href="/tos">Terms of service</a>
+                    <a class="text-gray-200 hover:text-gray-400 transition duration-300" href="/trackorder">Track your order</a>
+                </div>
+            </div>
+            <div class="flex space-x-4 items-center">
+                <a href="/products" class="text-xl text-gray-200 hover:text-gray-400 transition duration-300"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/cart" class="text-xl text-gray-200 hover:text-gray-400 transition duration-300"><i class="fa-solid fa-bag-shopping"></i></a>
+                <button class="md:hidden text-3xl text-white hover:text-gray-400 transition duration-300 mobile-menu-button"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="mobile-menu hidden md:hidden ease-in-out duration-300 transform transition-transform">
+            <ul class="ml-5 mb-5 font-semibold text-xl space-y-2">
+                <li class="ease-out duration-300 hover:translate-x-1 my-2">
+                    <a class="py-4 text-gray-200 hover:text-gray-400" href="/">Home</a>
+                </li>
+                <hr class="border-b border-gray-400">
+                <li class="ease-out duration-300 hover:translate-x-1 my-2">
+                    <a class="py-4 text-gray-200 hover:text-gray-400" href="/products">Products</a>
+                </li>
+                <hr class="border-b border-gray-400">
+                <li class="ease-out duration-300 hover:translate-x-1 my-2">
+                    <a class="py-4 text-gray-200 hover:text-gray-400" href="/trackorder">Track your order</a>
+                </li>
+                <hr class="border-b border-gray-400">
+                <li class="ease-out duration-300 hover:translate-x-1 my-2">
+                    <a class="py-4 text-gray-200 hover:text-gray-400" href="/tos">Terms of service</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
